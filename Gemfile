@@ -27,6 +27,11 @@ gem "rack-cors"
 # Use Redis adapter to run Action Cable in production
 gem "redis"
 
+# Serialization and Authorization
+gem "active_model_serializers"
+gem "pundit"
+gem "kaminari"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
 

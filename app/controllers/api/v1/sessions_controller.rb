@@ -6,6 +6,10 @@ module Api
 
       private
 
+      def respond_with(resource, _opts = {})
+        render json: { user: resource }
+      end
+
       def respond_to_on_destroy
         head :no_content
       end
@@ -15,4 +19,4 @@ module Api
       end
     end
   end
-end 
+end

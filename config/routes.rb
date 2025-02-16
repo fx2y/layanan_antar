@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, skip: :all
+  devise_for :users, defaults: { format: :json }, skip: :all
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -16,15 +16,21 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       devise_scope :user do
-        post 'users/sign_in', to: 'sessions#create'
-        delete 'users/sign_out', to: 'sessions#destroy'
+        post "users/sign_in", to: "sessions#create"
+        delete "users/sign_out", to: "sessions#destroy"
       end
 
-      resources :users, only: [:create] do
+      resources :users, only: [ :create ] do
         collection do
           get :me
-          put :me, to: 'users#update'
+          put :me, to: "users#update"
         end
+      end
+
+      resources :service_templates
+      resources :mitras do
+        resources :service_instances
+        resources :mitra_drivers
       end
     end
   end
